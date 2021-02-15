@@ -1,5 +1,6 @@
 package secondMarket.demo.repository;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -17,14 +18,10 @@ import java.util.Map;
 import java.util.Optional;
 
 @Repository
+@RequiredArgsConstructor
 public class JdbcTemplateMemberRepository implements MemberRepository{
 
     private final JdbcTemplate jdbcTemplate;
-
-    public JdbcTemplateMemberRepository(DataSource dataSource) {
-
-        jdbcTemplate = new JdbcTemplate(dataSource);
-    }
 
 
     @Override
@@ -39,6 +36,7 @@ public class JdbcTemplateMemberRepository implements MemberRepository{
         parameters.put("phone",member.getPhone());
         Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(parameters));
         member.setId(key.longValue());
+
         return member;
     }
 
