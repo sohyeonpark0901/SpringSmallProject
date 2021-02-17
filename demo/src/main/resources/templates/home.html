@@ -1,15 +1,167 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>메인</title>
+    <style>
+        {
+            margin: 0;
+            padding: 0;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* 헤더 */
+        header {
+            background-color: #ddd;
+            border-bottom: 1px solid #ddd;
+        }
+        header > div {
+            width: 90%;
+            min-width: 1000px;
+            max-width: 1200px;
+            height: 80px;
+            margin: 0 auto;
+        }
+
+        header .logo {
+            float: left;
+        }
+        header .logo img {
+            height: 50px;
+            margin-top: 0px;
+        }
+        header .gnb {
+            float: right;
+            list-style: none;
+        }
+        header .gnb li {
+            display: inline-block;
+            margin-left: 30px;
+            margin-top: 10px;
+        }
+        header .gnb a {
+            border: 1px solid #999;
+            border-radius: 100px;
+            padding: 5px;
+        }
+
+
+        /*카테고리*/
+        .category {
+            list-style: none;
+            width: 100%;
+            text-align: center;
+        }
+        .category li {
+            display: inline-block;
+            margin-left: 100px;
+            margin-top: 50px;
+        }
+        .category li:first-child {
+            margin-left: 0;
+        }
+        .category a {
+            border: 1px solid #000;
+            padding: 10px;
+        }
+
+        /*테이블*/
+        table {
+            border-collapse: collapse;
+        }
+        caption {
+            display: none;
+        }
+        .board_list_wrap {
+            padding: 50px;
+        }
+        .board_list{
+            width: 80%;
+            margin-left:10%;
+            border-top: 3px solid #000;
+        }
+        .board_list tr {
+            border-bottom: 1px solid #ccc;
+        }
+        .board_list th,
+        .board_list td {
+            padding: 10px;
+            font-size: 14px;
+        }
+        .board_list td {
+            text-align: center;
+        }
+        .board_list .tit {
+            text-align: left;
+        }
+        .board_list .tit:hover {
+            text-decoration: underline;
+        }
+
+        /*등록*/
+        .board_list_wrap .reg {
+            text-align: right;
+            margin-top: 20px;
+            margin-right: 10%;
+        }
+        .board_list_wrap .reg a {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 100px;
+            border: 1px solid #000;
+        }
+    </style>
+</head>
 <body>
-<div class="container">
-    <div>
-        <h1>Hello Spring</h1> <p>회원 기능</p>
-        <p>
-            <a href="/members/new">회원 가입</a>
-            <a href="/members/login">로그인</a>
-            <a href="/members/logout">로그아웃</a>
-            <a href="/members">회원 목록</a>
-        </p> </div>
-</div> <!-- /container -->
+<div id="wrap">
+    <header>
+        <div>
+            <h1 class="logo">
+                <a href="#"><img src="#" alt="Logo"></a>
+            </h1>
+            <ul class="gnb">
+                <li><a href="/members/login">로그인</a></li>
+                <li><a href="/members/new">회원가입</a></li>
+            </ul>
+        </div>
+    </header>
+</div>
+<div>
+    <ul class="category">
+        <li><a href="#">의류</a></li>
+        <li><a href="#">신발</a></li>
+        <li><a href="#">가방</a></li>
+    </ul>
+</div>
+<div class="board_list_wrap">
+    <table class="board_list">
+        <caption>게시판 목록</caption>
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>글쓴이</th>
+            <th>작성일</th>
+            <th>조회</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td class="tit">
+                <a href="#">aaaaaaaaaaa</a>
+            </td>
+            <td>ss</td>
+            <td>12321</td>
+            <td>111</td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="reg">
+        <a href="#">등록</a>
+    </div>
+</div>
 </body>
 </html>

@@ -36,20 +36,22 @@ public class MemberController {
          * 3. 조회해온 회원과 입력받은 회원정보의 비밀번호 일치여부 확인
          */
         Member findMember = memberService.LoginMember(memberLoginDto);
+
         if(!findMember.getPassword().equals(memberLoginDto.getPassword())){
             throw new IllegalStateException("비밀번호가 일치하지 않습니다.");
         }
 
-        session.setAttribute("loginMember",findMember);
+        session.setAttribute("memberEmail",findMember);
         return "redirect:/";
     }
     @GetMapping ("/members/logout")
     public String logout(HttpSession session){
-        Member loginMember = (Member) session.getAttribute("loginMember");
-        if(loginMember == null){
+        Member memberId = (Member) session.getAttribute("memberEmail");
+        if(memberId == null){
             throw new IllegalStateException("로그인한 사용자가 아닙니다.");
         }
-        session.removeAttribute("LoginMember");
+        System.out.println(memberId.getMemberId());
+        session.removeAttribute("memberEmail");
 
         return "redirect:/";
     }
@@ -71,7 +73,7 @@ public class MemberController {
     }
     @GetMapping("/members")
     public String list(Model model,HttpSession session){
-        Member loginMember = (Member) session.getAttribute("loginMember");
+        Member loginMember = (Member) session.getAttribute("memberEmail");
         if(loginMember == null){
             throw new IllegalStateException("로그인한 사용자가 아닙니다.");
         }

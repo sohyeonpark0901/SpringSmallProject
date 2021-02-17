@@ -12,6 +12,7 @@ public class ExceptionAdvice {
     })
     
     public String exception(Exception e){
+        System.out.println(e);
         return "fail";
     }
 
