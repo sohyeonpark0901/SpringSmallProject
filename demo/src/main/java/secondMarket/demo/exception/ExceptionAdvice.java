@@ -1,5 +1,6 @@
 package secondMarket.demo.exception;
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -8,11 +9,13 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class ExceptionAdvice {
 
     @ExceptionHandler({
-            IllegalStateException.class
+            IllegalStateException.class,
+            ImageException.class
     })
-    
-    public String exception(Exception e){
-        System.out.println(e);
+    public String exception(Exception e, Model model){
+
+        model.addAttribute("message",e.getMessage());
+
         return "fail";
     }
 

@@ -1,11 +1,14 @@
 package secondMarket.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import secondMarket.demo.domain.Image;
 import secondMarket.demo.domain.Product;
 import secondMarket.demo.repository.ImageRepository;
 import secondMarket.demo.repository.ProductRepository;
+
+import java.util.List;
 
 @Service
 
@@ -15,14 +18,17 @@ public class ProductService {
     private ImageRepository imageRepository;
 
     @Autowired
-    public ProductService(ProductRepository productRepository){
+    public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
-    public long create(Product product,Image image){
-        productRepository.save(product);
-        imageRepository.save(image,product.getProductId());
-        return
+    public void saveProduct(Product product, List<Image> images) {
+
+        Product saveProduct = productRepository.save(product);
+
+        for (Image image : images) {
+            imageRepository.save(image, saveProduct.getProductId());
+        }
     }
 
 }

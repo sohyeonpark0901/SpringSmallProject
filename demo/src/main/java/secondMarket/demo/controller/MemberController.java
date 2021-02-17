@@ -1,5 +1,6 @@
 package secondMarket.demo.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,8 +14,10 @@ import secondMarket.demo.service.MemberService;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+@Slf4j
 @Controller
 public class MemberController {
+
     private final MemberService memberService;
 
     //Todo : 핸들러 인터셉터 공부하기
@@ -28,6 +31,7 @@ public class MemberController {
     public String loginForm(){
         return "members/loginForm";
     }
+
     @PostMapping("/members/login")
     public String login(MemberLoginDto memberLoginDto,HttpSession session){
         /**
@@ -44,13 +48,19 @@ public class MemberController {
         session.setAttribute("memberEmail",findMember);
         return "redirect:/";
     }
+
     @GetMapping ("/members/logout")
     public String logout(HttpSession session){
+
         Member memberId = (Member) session.getAttribute("memberEmail");
+
         if(memberId == null){
             throw new IllegalStateException("로그인한 사용자가 아닙니다.");
         }
+
+        log.info("memberId = {}",memberId.getMemberId());
         System.out.println(memberId.getMemberId());
+
         session.removeAttribute("memberEmail");
 
         return "redirect:/";
@@ -62,23 +72,25 @@ public class MemberController {
 
     @PostMapping("/members/new")
     public String create(MemberForm form){
-        Member member = new Member();
-        member.setName(form.getName());
-        member.setEmail(form.getEmail());
-        member.setPassword(form.getPassword());
-        member.setAddress(form.getAddress());
-        member.setPhone(form.getPhone());
+
+        Member member = Member.createMember(form);
+
         memberService.join(member);
+
         return "redirect:/";
     }
     @GetMapping("/members")
     public String list(Model model,HttpSession session){
+
         Member loginMember = (Member) session.getAttribute("memberEmail");
+
         if(loginMember == null){
             throw new IllegalStateException("로그인한 사용자가 아닙니다.");
         }
+
         List<Member> members = memberService.findMembers();
         model.addAttribute("members",members);
+        
         return "members/memberList";
     }
 }

@@ -12,11 +12,13 @@ import java.util.Map;
 
 @Repository
 public class ProductRepository {
+
     private final JdbcTemplate jdbcTemplate;
 
     public ProductRepository(DataSource dataSource){
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
+
     public Product save(Product product){
         SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
         jdbcInsert.withTableName("product").usingGeneratedKeyColumns("product_id");
@@ -29,8 +31,5 @@ public class ProductRepository {
         Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(parameters));
         product.setProductId(key.longValue());
         return product;
-
-
-
     }
 }
