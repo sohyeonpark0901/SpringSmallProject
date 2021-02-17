@@ -39,7 +39,6 @@ public class ProductController {
         return "products/createProductForm";
     }
 
-
     /**
      * 1. 멤버를 찾는다
      * 2. 카테고리를 찾는다

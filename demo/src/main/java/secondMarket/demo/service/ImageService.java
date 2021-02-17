@@ -50,4 +50,5 @@ public class ImageService {
             throw new ImageException("이미지 저장 에러");
         }
     }
+
 }

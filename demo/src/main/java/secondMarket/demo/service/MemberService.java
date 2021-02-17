@@ -43,4 +43,5 @@ public class MemberService {
                 .orElseThrow(() -> new IllegalStateException("존재하지 않는 회원입니다."));
         return findMember;
     }
+    
 }

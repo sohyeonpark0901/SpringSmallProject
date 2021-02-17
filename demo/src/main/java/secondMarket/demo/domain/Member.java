@@ -15,6 +15,7 @@ public class Member {
     private String phone;
     private String role; //권한
 
+
     public static Member createMember(MemberForm memberForm){
         Member member = new Member();
         member.password = member.getPassword();

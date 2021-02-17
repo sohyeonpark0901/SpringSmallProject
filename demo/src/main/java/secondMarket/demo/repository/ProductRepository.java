@@ -31,5 +31,6 @@ public class ProductRepository {
         Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(parameters));
         product.setProductId(key.longValue());
         return product;
+
     }
 }

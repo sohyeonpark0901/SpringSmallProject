@@ -15,4 +15,5 @@ public class ProductSaveRequest {
     private int price;
 
     private List<MultipartFile> files;
+
 }

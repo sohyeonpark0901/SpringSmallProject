@@ -9,5 +9,4 @@ public class Comment {
     private int commentId;
     private String content;
 
-
 }
