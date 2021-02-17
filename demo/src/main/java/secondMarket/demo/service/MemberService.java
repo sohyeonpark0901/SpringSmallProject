@@ -1,12 +1,10 @@
 package secondMarket.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import secondMarket.demo.domain.Member;
 import secondMarket.demo.model.member.MemberLoginDto;
 import secondMarket.demo.repository.MemberRepository;
-import secondMarket.demo.repository.MemoryMemberRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +21,7 @@ public class MemberService {
     public Long join(Member member){
         validateDuplicateMember (member);
         memberRepository.save(member);
-        return member.getId();
+        return member.getMemberId();
     }
 
     private void validateDuplicateMember(Member member){
