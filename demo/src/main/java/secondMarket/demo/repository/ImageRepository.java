@@ -23,9 +23,9 @@ public class ImageRepository {
         jdbcInsert.withTableName("image").usingGeneratedKeyColumns("image_id");
         Map<String,Object> parameters = new HashMap<>();
         // TODO 파라미터 명 바꾸기
-        parameters.put("file_originalName",image.getFileOriginalName());
-        parameters.put("fileStoreName",image.getFileStoreName());
-        parameters.put("resourcePath",image.getResourcePath());
+        parameters.put("file_original_name",image.getFileOriginalName());
+        parameters.put("file_store_name",image.getFileStoreName());
+        parameters.put("resource_path",image.getResourcePath());
         parameters.put("product_id",image.getProductId());
         Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(parameters));
         image.setImageId(key.longValue());

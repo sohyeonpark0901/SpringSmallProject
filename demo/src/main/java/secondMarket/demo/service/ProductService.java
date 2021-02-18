@@ -19,9 +19,11 @@ public class ProductService {
     private ImageRepository imageRepository;
 
     @Autowired
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository,ImageRepository imageRepository) {
         this.productRepository = productRepository;
+        this.imageRepository = imageRepository;
     }
+
 
     public void saveProduct(Product product, List<Image> images) {
 
