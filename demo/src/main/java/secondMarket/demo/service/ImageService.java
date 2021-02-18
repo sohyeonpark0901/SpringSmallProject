@@ -25,6 +25,7 @@ public class ImageService {
         for (MultipartFile file : files) {
 
             String originalFilename = file.getOriginalFilename();
+            System.out.println(originalFilename);
             String storeName = LocalDateTime.now() + originalFilename;
             String resourcePath = location + storeName;
 

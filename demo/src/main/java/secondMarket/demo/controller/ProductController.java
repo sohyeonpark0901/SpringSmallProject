@@ -35,7 +35,12 @@ public class ProductController {
     }
 
     @GetMapping("/products/new")
-    public String createForm(){
+    public String createForm(HttpSession session){
+        Member loginMember = (Member) session.getAttribute("memberEmail");
+
+        if(loginMember == null){
+            throw new IllegalStateException("로그인을 해주세요.");
+        }
         return "products/createProductForm";
     }
 

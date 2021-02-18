@@ -148,19 +148,18 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>1</td>
-            <td class="tit">
-                <a href="#">aaaaaaaaaaa</a>
-            </td>
-            <td>ss</td>
-            <td>12321</td>
-            <td>111</td>
+        <tr th:each="h : ${boardList}">
+            <td th:text="${h.productId}"></td>
+            <td th:text="${h.title}"></td>
+            <td th:text="${h.content}"></td>
+            <td th:text="${h.category}"></td>
+            <td th:text="${h.price}"></td>
+
         </tr>
         </tbody>
     </table>
     <div class="reg">
-        <a href="#">등록</a>
+        <a href="/products/new">등록</a>
     </div>
 </div>
 </body>

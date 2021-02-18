@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>메인</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* 헤더 */
+        header {
+            background-color: #ddd;
+            border-bottom: 1px solid #ddd;
+        }
+        header > div {
+            width: 90%;
+            min-width: 1000px;
+            max-width: 1200px;
+            height: 80px;
+            margin: 0 auto;
+        }
+
+        header .logo {
+            float: left;
+            margin-top: 20px;
+        }
+        header .logo img {
+            height: 50px;
+        }
+        header .gnb {
+            float: right;
+            list-style: none;
+            margin-top: 20px;
+        }
+        header .gnb li {
+            display: inline-block;
+            margin-left: 30px;
+            margin-top: 10px;
+        }
+        header .gnb a {
+            border: 1px solid #999;
+            border-radius: 100px;
+            padding: 5px;
+        }
+
+        /* container */
+        .container {
+            width: 60%;
+            font-size: 20px;
+            margin-left: 20%;
+        }
+
+        /* 등록 */
+        .reg {
+            text-align: right;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="wrap">
+    <header>
+        <div>
+            <h1 class="logo">
+                <a href="#"><img src="#" alt="Logo"></a>
+            </h1>
+            <ul class="gnb">
+                <li><a href="#">로그아웃</a></li>
+            </ul>
+        </div>
+    </header>
+</div>
+<div class="container">
+    <form name= "productSaveForm" action="/products/new" method="post" enctype="multipart/form-data">
+        <fieldset>
+            <legend>제품등록</legend>
+            <div>
+                <lable for="category">카테고리</lable>
+                <select name="category" id="category">
+                    <option value="의류">의류</option>
+                    <option value="가방">가방</option>
+                    <option value="신발">신발</option>
+                </select>
+            </div>
+            <div>
+                <lable for="title">제목</lable>
+                <input type="text" name="title" id="title" placeholder="제목을 입력하세요">
+            </div>
+            <div>
+                <lable for="price">가격</lable>
+                <input type="text" name="price" id="price" placeholder="가격을 입력하세요">
+            </div>
+
+            <div>
+                <lable for="files">파일첨부</lable>
+                <input type="file" id="files" name = "files" multiple="multiple">
+            </div>
+            <div>
+                <lable for="content">제품설명</lable>
+                <textarea name="content" id="content" cols="50" rows="3"></textarea>
+            </div>
+        </fieldset>
+        <div class="reg">
+            <button type="submit">등록</button>
+        </div>
+</div>
+</form>
+</body>
