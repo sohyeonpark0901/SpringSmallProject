@@ -140,21 +140,22 @@
         <caption>게시판 목록</caption>
         <thead>
         <tr>
-            <th>번호</th>
+            <th style="visibility:hidden;position: absolute;">번호</th>
             <th>제목</th>
-            <th>글쓴이</th>
-            <th>작성일</th>
-            <th>조회</th>
+            <th>작성자</th>
+            <th>카테고리</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="h : ${boardList}">
-            <td th:text="${h.productId}"></td>
-            <td th:text="${h.title}"></td>
-            <td th:text="${h.content}"></td>
+        <tr th:each="h : ${mainPageList}">
+            <td style="visibility:hidden;position: absolute;" th:text="${h.productId}"></td>
+            <td>
+                <a th:href="@{'/products/'+${h.productId}}">
+                    <span th:text="${h.title}"></span>
+                </a>
+            </td>
+            <td th:text="${h.name}"></td>
             <td th:text="${h.category}"></td>
-            <td th:text="${h.price}"></td>
-
         </tr>
         </tbody>
     </table>

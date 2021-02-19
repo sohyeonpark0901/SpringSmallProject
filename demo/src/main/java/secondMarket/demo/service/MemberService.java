@@ -38,6 +38,7 @@ public class MemberService {
         return memberRepository.findById(memberId);
     }
 
+
     public Member LoginMember(MemberLoginDto memberLoginDto){
         Member findMember = memberRepository.findByEmail(memberLoginDto.getEmail())
                 .orElseThrow(() -> new IllegalStateException("존재하지 않는 회원입니다."));

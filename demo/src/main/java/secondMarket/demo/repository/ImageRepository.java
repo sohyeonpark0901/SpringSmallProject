@@ -26,10 +26,18 @@ public class ImageRepository {
         parameters.put("file_original_name",image.getFileOriginalName());
         parameters.put("file_store_name",image.getFileStoreName());
         parameters.put("resource_path",image.getResourcePath());
-        parameters.put("product_id",image.getProductId());
+        parameters.put("product_id",productId);
         Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(parameters));
         image.setImageId(key.longValue());
         return image;
 
     }
+
+    public int delete(Long productId){
+        int result = jdbcTemplate.update("DELETE FROM image WHERE product_id=?",productId);
+        return result;
+    }
+
+
+
 }

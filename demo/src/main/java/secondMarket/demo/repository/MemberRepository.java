@@ -51,6 +51,7 @@ public class MemberRepository {
     }
 
 
+
     public Optional<Member> findByEmail(String email) {
         List<Member> result = jdbcTemplate.query("select * from member where email = ?",memberRowMapper(),email);
         return result.stream().findAny();

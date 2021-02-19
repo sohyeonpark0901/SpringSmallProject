@@ -1,14 +1,15 @@
 package secondMarket.demo.controller;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import secondMarket.demo.domain.DetailPage;
 import secondMarket.demo.domain.Image;
 import secondMarket.demo.domain.Member;
 import secondMarket.demo.domain.Product;
@@ -23,7 +24,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
+
 public class ProductController {
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass().getSimpleName());
 
     private final ProductService productService;
     private final ImageService imageService;
@@ -57,7 +61,11 @@ public class ProductController {
 
         Member loginMember = (Member) session.getAttribute("memberEmail");
 
-        Long memberId = loginMember.getMemberId();
+        long memberId = loginMember.getMemberId();
+
+        if(loginMember == null){
+            throw new IllegalStateException("로그인을 해주세요");
+        }
 
         Product product = Product.createProduct(productSaveRequest, memberId);
 
@@ -68,4 +76,63 @@ public class ProductController {
         return "redirect:/";
     }
 
+    @DeleteMapping("/products/{productId}")
+    public boolean deleteProduct(@PathVariable Long productId,HttpSession session){
+        Member loginMember = (Member) session.getAttribute("memberEmail");
+
+        Long memberId = loginMember.getMemberId();
+        String memberRole = loginMember.getRole();
+
+        if(loginMember == null){
+            logger.info("3");
+            throw new IllegalStateException("로그인을 해주세요");
+        }
+
+        if(memberRole.equals("admin")){
+            boolean result = productService.adminDeleteProduct(productId);
+            if(result == true){
+                return true;
+            }
+            else {
+                logger.info("2");
+                throw new IllegalStateException("게시물이 삭제되지 않습니다.");
+
+            }
+
+        }
+        boolean result = productService.UserDeleteProduct(productId,memberId);
+        if(result == true){
+            return true;
+        }
+        else {
+            logger.info(String.valueOf(result));
+            throw new IllegalStateException("게시이 삭제되지 않습니다.");
+
+        }
+
+    }
+
+
+    @GetMapping("/products")
+    public String list(Model model) {
+        List<Product> boardList = productService.find();
+        model.addAttribute("boardList", boardList);
+        return "/products/productList";
+    }
+
+
+    @GetMapping("/products/{productId}")
+    public String list(@PathVariable("productId") Long productId, Model model) {
+        List<DetailPage> detailList = productService.findDetailPage(productId);
+        model.addAttribute("detailList", detailList);
+        return "/products/product";
+    }
+
+
+//    @GetMapping("/products/{no}/{nu}")
+//    public String list2(@PathVariable("nu") long nu, Model model) {
+//        List<DetailPage> commentList = productService.findCommentPage(nu);
+//        model.addAttribute("commentList", commentList);
+//        return "/products/post2";
+//    }
 }
