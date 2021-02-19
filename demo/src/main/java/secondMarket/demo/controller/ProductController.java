@@ -61,7 +61,7 @@ public class ProductController {
 
         Member loginMember = (Member) session.getAttribute("memberEmail");
 
-        long memberId = loginMember.getMemberId();
+        Long memberId = loginMember.getMemberId();
 
         if(loginMember == null){
             throw new IllegalStateException("로그인을 해주세요");

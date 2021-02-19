@@ -7,9 +7,7 @@ import java.util.List;
 
 @Data
 public class ProductSaveRequest {
-
     private String category;
-
     private String title;
     private String content;
     private int price;

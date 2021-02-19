@@ -1,6 +1,7 @@
 package secondMarket.demo.model.product;
 
 import lombok.*;
+
 @Data
 public class ProductDto {
 

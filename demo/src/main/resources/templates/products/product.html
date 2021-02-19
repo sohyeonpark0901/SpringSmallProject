@@ -103,24 +103,10 @@
 
     </style>
 </head>
+
+
 <body>
-<script>
-    var getUrlParameter = function getUrlParameter(sParam) {
-        var sPageURL = window.location.search.substring(1),
-            sURLVariables = sPageURL.split(':'),
-            sParameterName,
-            i;
 
-        for (i = 0; i < sURLVariables.length; i++) {
-            sParameterName = sURLVariables[i].split('=');
-
-            if (sParameterName[0] === sParam) {
-                return typeof sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
-            }
-        }
-        return false;
-    };
-</script>
 <div id="wrap">
     <header>
         <div>
@@ -166,8 +152,11 @@
             <td th:text="${h.content}"></td>
         </tr>
     </table>
-    <div class="reg">
-        <button class="bt3" type="submit"><a href="@{'/products/'+${productId}+'/comment'}">댓글</a></button>
+        <div class="reg" th:each="h:${detailList}">
+            <a  th:href="@{'/products/'+${h.productId}+'/comment'}">댓</a>
+
+<!--        <button class="bt3" type="submit" onclick="h:${h.productId}}">댓글</button>-->
     </div>
+
 </div>
 </body>

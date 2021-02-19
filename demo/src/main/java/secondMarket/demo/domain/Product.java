@@ -8,7 +8,7 @@ import secondMarket.demo.model.product.ProductSaveRequest;
 @Setter
 public class Product {
 
-    private Long productId;
+    private long productId;
 
     private String title;
 
@@ -18,9 +18,9 @@ public class Product {
 
     private String category;
 
-    private Long memberId;
+    private long memberId;
 
-    public static Product createProduct(ProductSaveRequest productSaveRequest,Long memberId){
+    public static Product createProduct(ProductSaveRequest productSaveRequest,long memberId){
         Product product = new Product();
         product.title = productSaveRequest.getTitle();
         product.content = productSaveRequest.getContent();

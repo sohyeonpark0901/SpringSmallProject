@@ -36,20 +36,21 @@ public class CommentController {
         Member loginMember = (Member) session.getAttribute("memberEmail");
 
         long memberId = loginMember.getMemberId();
+
         if(loginMember == null){
             throw new IllegalStateException("로그인을 해주세요");
         }
 
         Comment comment = Comment.createComment(commentSaveRequest,memberId,productId);
         commentService.saveComment(comment);
-        return "products/post2";
+        return "redirect:/products/"+productId;
     }
 
 
     @DeleteMapping("/products/{productId}/comments/{commentId}")
     public String deleteComment(@PathVariable Long productId,@PathVariable Long commentId, HttpSession session){
         Member loginMember = (Member) session.getAttribute("memberEmail");
-
+        logger.info(loginMember.toString());
         long memberId = loginMember.getMemberId();
         String memberRole = loginMember.getRole();
 
