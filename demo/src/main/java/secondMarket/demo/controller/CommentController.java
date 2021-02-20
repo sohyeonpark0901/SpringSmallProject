@@ -43,7 +43,7 @@ public class CommentController {
 
         Comment comment = Comment.createComment(commentSaveRequest,memberId,productId);
         commentService.saveComment(comment);
-        return "redirect:/products/"+productId;
+        return "redirect:/products/"+productId+"/"+productId;
     }
 
 

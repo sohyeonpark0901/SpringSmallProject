@@ -42,23 +42,24 @@
             float: right;
             list-style: none;
             margin-top: 20px;
+
         }
         header .gnb li {
             display: inline-block;
             margin-left: 30px;
-            margin-top: 10px;
+            margin-top: 3%;
+            font-size: 20px
         }
         header .gnb a {
             border: 1px solid #999;
             border-radius: 100px;
-            padding: 5px;
+            padding: 10px;
         }
 
 
         table {
             border: 1px solid;
-            width: 80%;
-            margin-top: 5%;
+            width: 50%;
             margin-left: auto;
             margin-right: auto;
             font-size: 20px;
@@ -73,7 +74,7 @@
         .tcomment {
             height: 100px;
         }
-        .ttitle, .tprice, .tmember, .timage, .tcontent, .tcomment {
+        .ttitle, .tprice, .tmember, .timage, .tcontent, .tcomment, .tcategory {
             background-color: #ccc;
             border-right: 1px solid #000;
         }
@@ -85,23 +86,21 @@
         /* 등록 */
         button {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 5%;
             width: 80px;
             font-size: 20px;
         }
         .bt1 {
             margin-right: 1%;
         }
-        .bt2 {
-            margin-left: 1%;
-            margin-right: 1%;
+        .reg {
+            text-align: right;
+            margin-right: 25%;
         }
         .bt3 {
-            margin-left: 1%;
+            margin-top: 3%;
         }
-        .reg {
-            text-align: center;
-        }
+
     </style>
 </head>
 <body>
@@ -117,11 +116,16 @@
         </div>
     </header>
 </div>
+<div class="reg">
+    <button class="bt1" type="submit"><a href="#">삭제</a></button>
+    <button class="bt2" type="submit"><a href="/">목록</a></button>
+</div>
 <div>
     <table border=1>
 
         <tr th:each="c:${commentList}">
-            <td class="ttitle">사진</td>
+            <img src="${c.file}">
+            <td class="timage">사진</td>
             <td th:text="${c.file}"></td>
         </tr>
         <tr th:each="c:${commentList}">
@@ -129,7 +133,7 @@
             <td th:text="${c.title}"></td>
         </tr>
         <tr th:each="c:${commentList}">
-            <td class="tcomment">카테고리</td>
+            <td class="tcategory">카테고리</td>
             <td th:text="${c.category}"></td>
         </tr>
         <tr th:each="c:${commentList}">
@@ -145,15 +149,12 @@
             <td th:text="${c.content}"></td>
         </tr>
         <tr th:each="c:${commentList}">
-            <td class="tcontent">설명</td>
-            <td th:text="${c.comment}"></td>
+            <td class="tcomment">댓글</td>
+            <td th:text="${c.content}"></td>
         </tr>
-
     </table>
     <div class="reg">
-        <button class="bt1" type="submit"><a href="#">수정</a></button>
-        <button class="bt2" type="submit"><a href="#">삭제</a></button>
-        <button class="bt3" type="submit"><a href="/">목록</a></button>
-
+        <button class="bt3" type="submit"><a href="#">댓글</a></button>
     </div>
 </div>
+</body>

@@ -127,7 +127,7 @@
             <th class="t3">등록</th>
         </tr>
         <tr>
-            <form id="createCommentData" name="cc" method="post" onsubmit="func()">
+            <form name="cc" method="post" onsubmit="func()">
                 <td><input type="text" id="content" name="content" style="width:700px"></td>
                 <td class="bt"><input type="submit" value="등록"></td>
             </form>
@@ -137,8 +137,7 @@
 <script language="JavaScript">
     function func() {
            var form = document.cc;
-           console.log(window.location.href);
-           form.action = window.location.href;
+           form.action = window.location.href; // products/{productId}/comment
     }
 </script>
 </body>

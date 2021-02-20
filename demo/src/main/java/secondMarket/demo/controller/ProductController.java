@@ -129,10 +129,10 @@ public class ProductController {
     }
 
 
-//    @GetMapping("/products/{no}/{nu}")
-//    public String list2(@PathVariable("nu") long nu, Model model) {
-//        List<DetailPage> commentList = productService.findCommentPage(nu);
-//        model.addAttribute("commentList", commentList);
-//        return "/products/post2";
-//    }
+    @GetMapping("/products/{productId}/{productId}")
+    public String list2(@PathVariable("productId") long productId, Model model) {
+        List<DetailPage> commentList = productService.findCommentPage(productId);
+        model.addAttribute("commentList", commentList);
+        return "/products/post2";
+    }
 }
