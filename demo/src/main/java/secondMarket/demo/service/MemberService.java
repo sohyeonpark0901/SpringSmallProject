@@ -1,5 +1,6 @@
 package secondMarket.demo.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import secondMarket.demo.domain.Member;
@@ -8,7 +9,7 @@ import secondMarket.demo.repository.MemberRepository;
 
 import java.util.List;
 import java.util.Optional;
-
+@Slf4j
 @Service
 public class MemberService {
 
@@ -19,7 +20,11 @@ public class MemberService {
     }
 
     public Long join(Member member){
-        validateDuplicateMember (member);
+        validateDuplicateMember(member);
+        if((String.valueOf(member.getPassword().length()).equals("0"))){
+
+            throw new IllegalStateException("비밀번호 없습니다.");
+        }
         memberRepository.save(member);
         return member.getMemberId();
     }
@@ -27,9 +32,11 @@ public class MemberService {
     private void validateDuplicateMember(Member member){
         memberRepository.findByEmail(member.getEmail())
                 .ifPresent(m->{
+                    System.out.println(member.getEmail());
                     throw new IllegalStateException("이미 존재하는 회원 입니다.");
                 });
     }
+
     public List<Member> findMembers(){
         return memberRepository.findAll();
     }

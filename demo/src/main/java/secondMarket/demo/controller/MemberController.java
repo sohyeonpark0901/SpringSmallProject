@@ -73,12 +73,18 @@ public class MemberController {
     @PostMapping("/members/new")
     public String create(MemberForm form){
 
-        Member member = Member.createMember(form);
-
-        memberService.join(member);
+            Member member = new Member();
+            member.setName(form.getName());
+            member.setEmail(form.getEmail());
+            member.setPassword(form.getPassword());
+            member.setAddress(form.getAddress());
+            member.setPhone(form.getPhone());
+            memberService.join(member);
 
         return "redirect:/";
-    }
+        }
+
+
 
     @GetMapping("/members")
     public String list(Model model,HttpSession session){

@@ -122,7 +122,12 @@ public class ProductController {
 
 
     @GetMapping("/products/{productId}")
-    public String list(@PathVariable("productId") Long productId, Model model) {
+    public String list(@PathVariable("productId") Long productId, Model model,HttpSession session) {
+        Member loginMember = (Member) session.getAttribute("memberEmail");
+
+        if(loginMember == null){
+            throw new IllegalStateException("로그인한 사용자가 아닙니다.");
+        }
         List<DetailPage> detailList = productService.findDetailPage(productId);
         model.addAttribute("detailList", detailList);
         List<DetailPage> comment2List = productService.findComment2Page(productId);

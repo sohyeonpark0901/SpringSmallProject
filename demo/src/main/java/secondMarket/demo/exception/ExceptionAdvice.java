@@ -15,7 +15,7 @@ public class ExceptionAdvice {
     public String exception(Exception e, Model model){
 
         model.addAttribute("message",e.getMessage());
-
+        System.out.println(e);
         return "fail";
     }
 

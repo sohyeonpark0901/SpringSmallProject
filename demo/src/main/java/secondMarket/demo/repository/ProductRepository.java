@@ -91,6 +91,7 @@ public class ProductRepository {
     public List<DetailPage> findDetailPage(long productId) {
         List<DetailPage> d = jdbcTemplate.query(
                 "SELECT image.resource_path as resource_path, product.product_id as product_id, product.title as title, product.category as category, member.name as name, product.price as price, product.content as content FROM member inner join product on member.member_id = product.member_id inner join image on product.product_id = image.product_id where product.product_id = ?;", detailPageRowMapper(), productId);
+                //"SELECT distinct image.file_store_name as file_store_name, product.product_id as product_id, product.title as title, product.category as category, member.name as name, product.price as price, product.content as content FROM member inner join product on member.member_id = product.member_id inner join image on product.product_id = image.product_id inner join comment on product.product_id = comment.product_id where product.product_id = ?;", commentPageRowMapper(), productId);
 
         return d;
     }
@@ -98,6 +99,7 @@ public class ProductRepository {
         return (rs, rowNum) -> {
             DetailPage detailPage = new DetailPage();
             detailPage.setFile(rs.getString("resource_path"));
+            //detailPage.setFile(rs.getString("file_store_name"));
             detailPage.setProductId(rs.getLong("product_id"));
             detailPage.setTitle(rs.getString("title"));
             detailPage.setName(rs.getString("name"));
@@ -110,6 +112,7 @@ public class ProductRepository {
     public List<DetailPage> findCommentPage(long productId) {
         List<DetailPage> co = jdbcTemplate.query(
                 "SELECT distinct image.resource_path as resource_path, product.product_id as product_id, product.title as title, product.category as category, member.name as name, product.price as price, product.content as content FROM member inner join product on member.member_id = product.member_id inner join image on product.product_id = image.product_id inner join comment on product.product_id = comment.product_id where product.product_id = ?;", commentPageRowMapper(), productId);
+                //"SELECT distinct image.file_store_name as file_store_name, product.product_id as product_id, product.title as title, product.category as category, member.name as name, product.price as price, product.content as content FROM member inner join product on member.member_id = product.member_id inner join image on product.product_id = image.product_id inner join comment on product.product_id = comment.product_id where product.product_id = ?;", commentPageRowMapper(), productId);
 
         return co;
     }
