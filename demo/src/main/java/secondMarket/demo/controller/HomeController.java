@@ -6,9 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import secondMarket.demo.domain.MainPage;
+import secondMarket.demo.domain.Member;
 import secondMarket.demo.domain.Product;
 import secondMarket.demo.service.ProductService;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -26,10 +28,15 @@ public class HomeController {
 //        return "home";
 //    }
     @GetMapping("/")
-    public String list(Model model){
+    public String list(Model model, HttpSession session){
+        Member loginMember = (Member) session.getAttribute("memberEmail");
+
         List<MainPage> mainPageList = productService.findMainPage();
         model.addAttribute("mainPageList", mainPageList);
-        return "home";
+        if(loginMember == null){
+            return "home";
+        }
+        return "home2";
     }
 
 }

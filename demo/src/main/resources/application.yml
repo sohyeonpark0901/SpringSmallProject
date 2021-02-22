@@ -1,0 +1,21 @@
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB # 파일 최대 크기 100 MB
+      max-request-size: 100MB # 파일 최대 요청 크기 100 MB
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test?serverTimezone=Asia/Seoul
+    username: root
+    password: qkrthgus1558-
+
+
+cloud:
+  aws:
+    s3:
+      bucket: secondmarket
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false

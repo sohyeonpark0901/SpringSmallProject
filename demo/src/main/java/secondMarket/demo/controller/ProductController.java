@@ -76,7 +76,7 @@ public class ProductController {
         return "redirect:/";
     }
 
-    @DeleteMapping("/products/{productId}")
+    @PostMapping("/products/{productId}")
     public String deleteProduct(@PathVariable Long productId,HttpSession session){
         Member loginMember = (Member) session.getAttribute("memberEmail");
 

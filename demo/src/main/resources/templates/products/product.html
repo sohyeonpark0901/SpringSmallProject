@@ -59,7 +59,7 @@
 
         table {
             border: 1px solid;
-            width: 50%;
+            width: 80%;
             margin-left: auto;
             margin-right: auto;
             font-size: 20px;
@@ -67,7 +67,7 @@
             border-collapse: collapse;
         }
         .timage {
-            height: 200px;
+            height: auto;
         }
 
         .ttitle {
@@ -138,17 +138,17 @@
     <button class="bt2" type="submit"><a href="/">목록</a></button>
 </div>
 <div>
-    jklasdfjkls
 
-    <img src="/Users/sohyeonpark/springProject/demo/src/main/raoqdqyukimonkey.jpeg">
     <table border=1>
         <tr th:each="h:${detailList}">
             <td class="timage">사진</td>
-            <td><img th:height="720px"  width="1300px" th:src="${h.file}" alt="error!"></td>
+            <td><img th:src="@{${h.file}}" style="width: auto;height: auto">
+            </td>
+
         </tr>
         <tr th:each="h:${detailList}">
             <td class="ttitle">제목</td>
-            <td th:text="${h.title}"></td>
+            <td th:text="${h.title}" ></td>
         </tr>
         <tr th:each="h:${detailList}">
             <td class="tcategory">카테고리</td>
@@ -183,7 +183,8 @@
 <script>
     function func() {
         var form = document.cc;
-        form.action = window.location.href; // products/{productId}/comment
+        form.action = window.location.href; // products/{productId}
     }
+
 </script>
 </body>
