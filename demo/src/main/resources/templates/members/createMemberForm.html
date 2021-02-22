@@ -1,27 +1,129 @@
-
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>회원가입</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        input, select {
+            font-size: 20px;
+        }
+        div {
+            padding: 10px;
+        }
+
+        /* 헤더 */
+        header {
+            background-color: #ddd;
+            border-bottom: 1px solid #ddd;
+        }
+        header > div {
+            width: 90%;
+            min-width: 1000px;
+            max-width: 1200px;
+            height: 80px;
+            margin: 0 auto;
+        }
+
+        header .logo {
+            float: left;
+            margin-top: 20px;
+        }
+        header .logo img {
+            height: 50px;
+        }
+        header .gnb {
+            float: right;
+            list-style: none;
+            margin-top: 20px;
+
+        }
+        header .gnb li {
+            display: inline-block;
+            margin-left: 30px;
+            margin-top: 3%;
+            font-size: 20px
+        }
+        header .gnb a {
+            border: 1px solid #999;
+            border-radius: 100px;
+            padding: 10px;
+        }
+
+        /* container */
+        .container {
+            width: 50%;
+            font-size: 20px;
+            margin-top: 3%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        fieldset {
+            background-color: #eee;
+        }
+
+        /* 가입 */
+        button {
+            text-align: center;
+            margin-top: 20px;
+            width: 80px;
+            font-size: 20px;
+        }
+        .reg {
+            text-align: right;
+        }</style>
+</head>
 <body>
+<div id="wrap">
+    <header>
+        <div>
+            <h1 class="logo">
+                <a href="/"><img src="#" alt="Logo"></a>
+            </h1>
+            <ul class="gnb">
+                <li><a href="/members/login">로그인</a></li>
+            </ul>
+        </div>
+    </header>
+</div>
 <div class="container">
     <form action="/members/new" method="post">
-        <div class="form-group">
-            <label for="email">이메일</label>
-            <input type="text" id="email" name="email" placeholder="이메을입력하세요">
-            <label for="password">비밀번호</label>
-            <input type="text" id="password" name="password" placeholder="비밀번호을입력하세요">
-            <label for="name">이름</label>
-            <input type="text" id="name" name="name" placeholder="이름을입력하세요">
-            <label for="address">주소</label>
-            <input type="text" id="address" name="address" placeholder="주소을입력하세요">
-            <label for="phone">번호</label>
-            <input type="text" id="phone" name="phone" placeholder="번호을입력하세요">
-
-
-
-
-
+        <fieldset>
+            <legend><strong>회원가입</strong></legend>
+            <div>
+                <label for="member_id">아이디 </label>
+                <input id="member_id" type="text" name="member_id" placeholder="아이디를 입력하세요">
+            </div>
+            <div>
+                <label for="password">비밀번호 </label>
+                <input id="password" type="password" name="password" placeholder="비밀번호를 입력하세요">
+            </div>
+            <div>
+                <label for="name">이름 </label>
+                <input id="name" type="text" name="name" placeholder="이름을 입력하세요">
+            </div>
+            <div>
+                <label for="address">주소 </label>
+                <input id="address" type="text" name="address" placeholder="주소를 입력하세요">
+            </div>
+            <div>
+                <label for="phone">전화번호 </label>
+                <input id="phone" type="text" name="address" placeholder="전화번호를 입력하세요">
+            </div>
+            <div>
+                <label for="email">이메일 </label>
+                <input id="email" type="email" name="email" placeholder="이메일을 입력하세요">
+            </div>
+        </fieldset>
+        <div class="reg">
+            <button type="submit">가입</button>
         </div>
-        <button type="submit">등록</button>
     </form>
 </div> <!-- /container -->
 </body>

@@ -61,7 +61,7 @@ public class CommentController {
         if(memberRole.equals("admin")){
             boolean result = commentService.adminDeleteComment(commentId,productId);
             if(result == true){
-                return "성공";
+                return "redirect:/products/"+productId+"/"+productId;
             }
             else {
                 throw new IllegalStateException("댓글이 삭제되지 않습니다.");
@@ -70,7 +70,7 @@ public class CommentController {
 
        boolean result = commentService.UserDeleteComment(memberId,commentId,productId);
         if(result == true){
-            return "성공 ";
+            return "redirect:/products/"+productId+"/"+productId;
         }
         else {
             throw new IllegalStateException("댓글이 삭제되지 않습니다.");

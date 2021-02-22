@@ -77,24 +77,24 @@ public class ProductController {
     }
 
     @DeleteMapping("/products/{productId}")
-    public boolean deleteProduct(@PathVariable Long productId,HttpSession session){
+    public String deleteProduct(@PathVariable Long productId,HttpSession session){
         Member loginMember = (Member) session.getAttribute("memberEmail");
 
         Long memberId = loginMember.getMemberId();
         String memberRole = loginMember.getRole();
 
         if(loginMember == null){
-            logger.info("3");
+
             throw new IllegalStateException("로그인을 해주세요");
         }
 
         if(memberRole.equals("admin")){
             boolean result = productService.adminDeleteProduct(productId);
             if(result == true){
-                return true;
+                return "redirect:/";
             }
             else {
-                logger.info("2");
+
                 throw new IllegalStateException("게시물이 삭제되지 않습니다.");
 
             }
@@ -102,7 +102,7 @@ public class ProductController {
         }
         boolean result = productService.UserDeleteProduct(productId,memberId);
         if(result == true){
-            return true;
+           return "redirect:/";
         }
         else {
             logger.info(String.valueOf(result));
@@ -125,6 +125,8 @@ public class ProductController {
     public String list(@PathVariable("productId") Long productId, Model model) {
         List<DetailPage> detailList = productService.findDetailPage(productId);
         model.addAttribute("detailList", detailList);
+        List<DetailPage> comment2List = productService.findComment2Page(productId);
+        model.addAttribute("comment2List", comment2List);
         return "/products/product";
     }
 
@@ -133,6 +135,8 @@ public class ProductController {
     public String list2(@PathVariable("productId") long productId, Model model) {
         List<DetailPage> commentList = productService.findCommentPage(productId);
         model.addAttribute("commentList", commentList);
+        List<DetailPage> comment2List = productService.findComment2Page(productId);
+        model.addAttribute("comment2List", comment2List);
         return "/products/post2";
     }
 }

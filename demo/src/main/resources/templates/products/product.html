@@ -66,10 +66,13 @@
             text-align: center;
             border-collapse: collapse;
         }
+        .timage {
+            height: 200px;
+        }
+
         .ttitle {
             width: 80px;
         }
-        .timage,
         .tcontent,
         .tcomment {
             height: 100px;
@@ -86,32 +89,38 @@
         /* 등록 */
         button {
             text-align: center;
-            margin-top: 5%;
             width: 80px;
             font-size: 20px;
-        }
-        .bt1 {
-            margin-right: 1%;
         }
         .reg {
             text-align: right;
             margin-right: 25%;
+            font-size: 20px;
         }
-        .bt3 {
-            margin-top: 3%;
+        form {
+            margin-left: 3%;
+            float: right;
         }
-
+        .comm {
+            text-align: right;
+            margin-right: 25%;
+            font-size: 20px;
+            margin-top: 1%;
+        }
+        .comm a {
+            border: 1px solid #999;
+            border-radius: 100px;
+            padding: 10px;
+        }
     </style>
 </head>
 
-
 <body>
-
 <div id="wrap">
     <header>
         <div>
             <h1 class="logo">
-                <a href="/"><img src="#" alt="Logo"></a>
+                <a href="/"><img src="https://postfiles.pstatic.net/MjAyMTAyMjFfMTg0/MDAxNjEzOTAzNjY1MTc2.n7xvThQG9FI3pCu0Vqw_x5mEenIdlujejKPiVDWu9QMg.3exJE5C6ikEt0a09Li7nNYm9YYyzG5XEDNOv4epPvgcg.PNG.gmldud9313/IMG_1822.png?type=w773" alt="Logo"></a>
             </h1>
             <ul class="gnb">
                 <li><a href="/">로그아웃</a></li>
@@ -120,16 +129,16 @@
     </header>
 </div>
 <div class="reg">
-    <button class="bt1" type="submit"><a href="#">삭제</a></button>
+    <input type="hidden" onsubmit="delete_func()" method="delete"/>
+    <button type="submit" id="submitButton"> </button>
+
     <button class="bt2" type="submit"><a href="/">목록</a></button>
 </div>
 <div>
     <table border=1>
-
         <tr th:each="h:${detailList}">
-            <img src="${h.file}">
             <td class="timage">사진</td>
-            <td th:text="${h.file}"></td>
+            <td><img src="${h.file}" style="height:180px"></td>
         </tr>
         <tr th:each="h:${detailList}">
             <td class="ttitle">제목</td>
@@ -151,12 +160,24 @@
             <td class="tcontent">설명</td>
             <td th:text="${h.content}"></td>
         </tr>
+        <div>
+            <table border=1>
+
+                <tr th:each="c:${comment2List}">
+                    <td class="tcontent">댓글</td>
+                    <td th:text="${c.comment}"></td>
+                </tr>
+            </table>
+        </div>
     </table>
-        <div class="reg" th:each="h:${detailList}">
-            <a  th:href="@{'/products/'+${h.productId}+'/comment'}">댓</a>
-
-<!--        <button class="bt3" type="submit" onclick="h:${h.productId}}">댓글</button>-->
+    <div class="comm" th:each="h:${detailList}">
+        <a th:href="@{'/products/'+${h.productId}+'/comment'}">댓글</a>
     </div>
-
 </div>
+<script language="JavaScript">
+    function delete_func() {
+        var form = document.cc;
+        form.action = window.location.href; // products/{productId}/comment
+    }
+</script>
 </body>

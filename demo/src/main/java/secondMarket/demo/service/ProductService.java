@@ -90,4 +90,8 @@ public class ProductService {
     public List<DetailPage> findCommentPage(long productId) {
         return productRepository.findCommentPage(productId);
     }
+
+    public List<DetailPage> findComment2Page(long productId) {
+        return productRepository.findComment2Page(productId);
+    }
 }

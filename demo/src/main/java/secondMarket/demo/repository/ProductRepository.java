@@ -109,10 +109,19 @@ public class ProductRepository {
     }
     public List<DetailPage> findCommentPage(long productId) {
         List<DetailPage> co = jdbcTemplate.query(
-                "SELECT image.resource_path as resource_path, product.product_id as product_id, product.title as title, product.category as category, member.name as name, product.price as price, product.content as content, comment.content as comment FROM member inner join product on member.member_id = product.member_id inner join image on product.product_id = image.product_id inner join comment on product.product_id = comment.product_id where product.product_id = ?;", commentPageRowMapper(), productId);
+                "SELECT distinct image.resource_path as resource_path, product.product_id as product_id, product.title as title, product.category as category, member.name as name, product.price as price, product.content as content FROM member inner join product on member.member_id = product.member_id inner join image on product.product_id = image.product_id inner join comment on product.product_id = comment.product_id where product.product_id = ?;", commentPageRowMapper(), productId);
 
         return co;
     }
+
+    public List<DetailPage> findComment2Page(long productId) {
+        List<DetailPage> co = jdbcTemplate.query(
+                "SELECT product.product_id as product_id, comment.content as comment FROM product inner join comment on product.product_id = comment.product_id where product.product_id = ?;", comment2PageRowMapper(), productId);
+
+        return co;
+    }
+
+
     private RowMapper<DetailPage> commentPageRowMapper() {
         return (rs, rowNum) -> {
             DetailPage detailPage = new DetailPage();
@@ -123,6 +132,16 @@ public class ProductRepository {
             detailPage.setCategory(rs.getString("category"));
             detailPage.setPrice(rs.getString("price"));
             detailPage.setContent(rs.getString("content"));
+
+            return detailPage;
+        };
+
+    }
+
+    private RowMapper<DetailPage> comment2PageRowMapper() {
+        return (rs, rowNum) -> {
+            DetailPage detailPage = new DetailPage();
+            detailPage.setProductId(rs.getLong("product_id"));
             detailPage.setComment(rs.getString("comment"));
             return detailPage;
         };
