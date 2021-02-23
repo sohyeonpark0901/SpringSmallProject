@@ -77,41 +77,41 @@ public class ProductController {
     }
 
     @PostMapping("/products/{productId}")
-    public String deleteProduct(@PathVariable Long productId,HttpSession session){
+    public String deleteProduct(@PathVariable Long productId,HttpSession session) {
         Member loginMember = (Member) session.getAttribute("memberEmail");
 
         Long memberId = loginMember.getMemberId();
         String memberRole = loginMember.getRole();
 
-        if(loginMember == null){
+
+        if (loginMember == null) {
 
             throw new IllegalStateException("로그인을 해주세요");
         }
 
-        if(memberRole.equals("admin")){
+        if (memberRole.equals("admin")) {
             boolean result = productService.adminDeleteProduct(productId);
-            if(result == true){
+            if (result == true) {
                 return "redirect:/";
-            }
-            else {
+            } else {
 
                 throw new IllegalStateException("게시물이 삭제되지 않습니다.");
 
             }
 
         }
-        boolean result = productService.UserDeleteProduct(productId,memberId);
-        if(result == true){
-           return "redirect:/";
-        }
-        else {
-            logger.info(String.valueOf(result));
-            throw new IllegalStateException("게시이 삭제되지 않습니다.");
 
-        }
+            boolean result = productService.UserDeleteProduct(productId, memberId);
+            if (result == true) {
+                return "redirect:/";
+            } else {
+
+                throw new IllegalStateException("게시물이 삭제되지 않습니다.");
+
+            }
+
 
     }
-
 
     @GetMapping("/products")
     public String list(Model model) {

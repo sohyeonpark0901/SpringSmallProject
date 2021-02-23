@@ -33,8 +33,12 @@ public class ImageRepository {
 
     }
 
-    public int delete(Long productId){
+    public int adminDelete(Long productId){
         int result = jdbcTemplate.update("DELETE FROM image WHERE product_id=?",productId);
+        return result;
+    }
+    public int userDelete(Long productId,Long memberId){
+        int result = jdbcTemplate.update("DELETE FROM image WHERE image.product_id IN (select product.product_id from product where product.product_id=? and product.member_id=?);",productId,memberId);
         return result;
     }
 

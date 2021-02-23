@@ -58,8 +58,7 @@ public class MemberController {
             throw new IllegalStateException("로그인한 사용자가 아닙니다.");
         }
 
-        log.info("memberId = {}",memberId.getMemberId());
-        System.out.println(memberId.getMemberId());
+
 
         session.removeAttribute("memberEmail");
 

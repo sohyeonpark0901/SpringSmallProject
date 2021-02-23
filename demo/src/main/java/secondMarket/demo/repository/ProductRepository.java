@@ -1,5 +1,7 @@
 package secondMarket.demo.repository;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -16,6 +18,7 @@ import java.util.Map;
 
 @Repository
 public class ProductRepository {
+    private Logger logger = LoggerFactory.getLogger(this.getClass().getSimpleName());
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -42,7 +45,7 @@ public class ProductRepository {
         int result = jdbcTemplate.update("DELETE FROM product WHERE product_id=?",productId);
         return result;
     }
-    public int UserDelete(Long productId,Long memberId){
+    public long UserDelete(Long productId,Long memberId){
         int result = jdbcTemplate.update("DELETE FROM product WHERE product_id=? and member_id=?",productId,memberId);
         return result;
     }
@@ -164,4 +167,6 @@ public class ProductRepository {
             return detailPage;
         };
     }
+
+
 }
