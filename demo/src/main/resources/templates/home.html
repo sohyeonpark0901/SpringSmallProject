@@ -49,22 +49,22 @@
 
 
         /*카테고리*/
-        .category {
-            list-style: none;
-            width: 100%;
-            text-align: center;
+        .tcategory {
+            margin-top: 5%;
+            border-collapse: collapse;
+            width: 75%;
+            font-size: 25px;
+            background-color: #eee;
+            margin-left: auto;
+            margin-right: auto;
         }
-        .category li {
-            display: inline-block;
-            margin-left: 100px;
-            margin-top: 50px;
+        .tcategory th, .tcategory td {
+            padding: 15px 20px;
+            border-bottom: 1px solid #ccc;
+            border-top: 1px solid #ccc;
         }
-        .category li:first-child {
-            margin-left: 0;
-        }
-        .category a {
-            border: 1px solid #000;
-            padding: 10px;
+        .t2 {
+            border: 1px solid #ccc
         }
 
         /*테이블*/
@@ -88,7 +88,7 @@
         .board_list th,
         .board_list td {
             padding: 10px;
-            font-size: 14px;
+
         }
         .board_list td {
             text-align: center;
@@ -98,6 +98,9 @@
         }
         .board_list .tit:hover {
             text-decoration: underline;
+        }
+        .theader {
+            font-size: 25px;
         }
 
         /*등록*/
@@ -128,18 +131,18 @@
         </div>
     </header>
 </div>
-<div>
-    <ul class="category">
-        <li><a href="#">의류</a></li>
-        <li><a href="#">신발</a></li>
-        <li><a href="#">가방</a></li>
-    </ul>
-</div>
+<table class="tcategory">
+    <tr>
+        <th><a href="/의류">의류</a></th>
+        <th class="t2"><a href="/신발">신발</a></th>
+        <th><a href="/가방">가방</a></th>
+    </tr>
+</table>
 <div class="board_list_wrap">
     <table class="board_list">
         <caption>게시판 목록</caption>
         <thead>
-        <tr>
+        <tr class="theader">
             <th style="visibility:hidden;position: absolute;">번호</th>
             <th>제목</th>
             <th>작성자</th>

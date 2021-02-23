@@ -76,6 +76,10 @@ public class ProductService {
         return productRepository.findMainPage();
     }
 
+    public List<MainPage> findMainPageByCategory(String category) {
+        return productRepository.findMainPageByCategory(category);
+    }
+
     public List<Product> find() {
         return productRepository.findAll();
     }

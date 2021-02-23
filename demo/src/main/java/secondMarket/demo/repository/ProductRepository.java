@@ -30,7 +30,7 @@ public class ProductRepository {
         parameters.put("title",product.getTitle());
         parameters.put("category",product.getCategory());
         parameters.put("price",product.getPrice());
-        parameters.put("content",product.getCategory());
+        parameters.put("content",product.getContent());
         parameters.put("member_id",product.getMemberId());
         Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(parameters));
         product.setProductId(key.longValue());
@@ -53,6 +53,14 @@ public class ProductRepository {
 
         return a;
     }
+
+    public List<MainPage> findMainPageByCategory(String category) {
+        List<MainPage> a = jdbcTemplate.query(
+                "SELECT product.product_id as product_id, product.title as title, member.name as name ,product.category as category FROM member inner join product on member.member_id = product.member_id where product.category = ?  ", mainPageRowMapper(), category);
+
+        return a;
+    }
+
     private RowMapper<MainPage> mainPageRowMapper() {
         return (rs, rowNum) -> {
             MainPage mainPage = new MainPage();
@@ -126,8 +134,7 @@ public class ProductRepository {
 
     public List<DetailPage> findComment2Page(long productId) {
         List<DetailPage> co = jdbcTemplate.query(
-                "SELECT product.product_id as product_id, comment.content as comment FROM product inner join comment on product.product_id = comment.product_id where product.product_id = ?;", comment2PageRowMapper(), productId);
-
+                "SELECT product.product_id as product_id, comment.content as comment, member.name as name FROM product inner join comment on product.product_id = comment.product_id inner join member on member.member_id = comment.member_id where product.product_id = ?;", comment2PageRowMapper(), productId);
         return co;
     }
 
@@ -152,6 +159,7 @@ public class ProductRepository {
         return (rs, rowNum) -> {
             DetailPage detailPage = new DetailPage();
             detailPage.setProductId(rs.getLong("product_id"));
+            detailPage.setName(rs.getString("name"));
             detailPage.setComment(rs.getString("comment"));
             return detailPage;
         };
